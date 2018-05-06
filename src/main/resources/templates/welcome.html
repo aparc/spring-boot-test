@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <script th:src="@{/js/jquery.js}"></script>
+</head>
+<body role="document">
+<div class="container">
+    <h1 style="text-align: center">Welcome!</h1>
+
+    <button class="button" value="Hreb">HLEB</button>
+
+    <div id="shit" class="col-md-4">
+
+    </div>
+
+   <!--<table class="table table-bordered text-center">-->
+       <!--<tr>-->
+           <!--<td>ID</td>-->
+           <!--<td>Country</td>-->
+       <!--</tr>-->
+       <!--<tr th:each="country : ${listCountries}">-->
+           <!--<td th:text="${country.id}">Country ID</td>-->
+           <!--<td th:text="${country.countryName}">Country Name</td>-->
+       <!--</tr>-->
+   <!--</table>-->
+
+
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        $(".button").click(function () {
+            $.ajax({
+                url: "/getList",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    var str = "";
+                    $.each(result, function (i, elem) {
+                        str += elem.id + ' ' + elem.countryName;
+                    })
+                    $("#shit").html(str);
+                }})
+        })
+        
+    });
+</script>
+</html>
